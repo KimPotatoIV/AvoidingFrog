@@ -1,0 +1,94 @@
+[gd_scene load_steps=14 format=3 uid="uid://cj0oyvix34b3d"]
+
+[ext_resource type="Script" path="res://scenes/frog/frog.gd" id="1_j7sst"]
+[ext_resource type="Texture2D" uid="uid://ctcfkpqjwmwvh" path="res://scenes/frog/frog_spritesheet.png.png" id="1_tc7hp"]
+[ext_resource type="Texture2D" uid="uid://3owdb0r00wyn" path="res://scenes/frog/frog_death_spritesheet.png" id="2_abfwc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wwpf5"]
+atlas = ExtResource("2_abfwc")
+region = Rect2(0, 0, 28, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_thm3b"]
+atlas = ExtResource("2_abfwc")
+region = Rect2(28, 0, 28, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u6jri"]
+atlas = ExtResource("2_abfwc")
+region = Rect2(56, 0, 28, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8uydr"]
+atlas = ExtResource("2_abfwc")
+region = Rect2(84, 0, 28, 26)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f0wcr"]
+atlas = ExtResource("1_tc7hp")
+region = Rect2(0, 0, 35, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i4ywe"]
+atlas = ExtResource("1_tc7hp")
+region = Rect2(35, 0, 35, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q0an6"]
+atlas = ExtResource("1_tc7hp")
+region = Rect2(70, 0, 35, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_li1w0"]
+atlas = ExtResource("1_tc7hp")
+region = Rect2(105, 0, 35, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jjr4c"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wwpf5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_thm3b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u6jri")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8uydr")
+}],
+"loop": false,
+"name": &"death",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f0wcr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i4ywe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q0an6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_li1w0")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 7.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_sm0rf"]
+radius = 9.0
+height = 18.0
+
+[node name="Frog" type="RigidBody2D"]
+lock_rotation = true
+continuous_cd = 1
+contact_monitor = true
+max_contacts_reported = 5
+script = ExtResource("1_j7sst")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_jjr4c")
+animation = &"death"
+autoplay = "idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 2)
+shape = SubResource("CapsuleShape2D_sm0rf")
