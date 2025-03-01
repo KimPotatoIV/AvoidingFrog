@@ -3,11 +3,14 @@ extends Node
 ##################################################
 const EXPLOSION_SOUND: AudioStream = preload("res://sounds/maou_se_system10.wav")
 const GAME_OVER_SOUND: AudioStream = preload("res://sounds/game_over.wav")
+const BGM: AudioStream = preload("res://sounds/hurry_up_and_run.wav")
 # 각 효과음 미리 불러오기
 
 var effect_sound_player: AudioStreamPlayer
 var game_over_sound_player: AudioStreamPlayer
 # 각 효과음 플레이어
+
+var bgm_sound_player: AudioStreamPlayer
 
 ##################################################
 func _ready() -> void:
@@ -18,6 +21,11 @@ func _ready() -> void:
 	game_over_sound_player = AudioStreamPlayer.new()
 	add_child(game_over_sound_player)
 	# game_over_sound_player 설정 및 노드 추가
+	
+	bgm_sound_player = AudioStreamPlayer.new()
+	add_child(bgm_sound_player)
+	bgm_sound_player.stream = BGM
+	bgm_sound_player.play()
 
 ##################################################
 func play_explosion_sound() -> void:
